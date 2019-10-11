@@ -4,10 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CreatePostingComponent } from './components/create-posting/create-posting.component';
 import { EditPostingComponent } from './components/edit-posting/edit-posting.component';
-import { IndexPostingComponent } from './components/index-posting/index-posting.component';
 
 import { RouterModule, Routes } from '@angular/router';
-import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import { IndexPostingComponent } from './components/index-posting/index-posting.component';
 
 const routes: Routes = [
   {
@@ -33,8 +32,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
-    SlimLoadingBarModule
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
