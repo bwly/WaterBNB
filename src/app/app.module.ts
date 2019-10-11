@@ -2,13 +2,37 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { CreatePostingComponent } from './components/create-posting/create-posting.component';
+import { EditPostingComponent } from './components/edit-posting/edit-posting.component';
+
+import { RouterModule, Routes } from '@angular/router';
+import { IndexPostingComponent } from './components/index-posting/index-posting.component';
+
+const routes: Routes = [
+  {
+    path: 'createPosting',
+    component: CreatePostingComponent
+  },
+  {
+    path: 'editPosting/:id',
+    component: EditPostingComponent
+  },
+  {
+    path: 'indexPosting',
+    component: IndexPostingComponent
+  }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreatePostingComponent,
+    EditPostingComponent,
+    IndexPostingComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
