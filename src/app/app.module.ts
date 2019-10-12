@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -43,7 +44,8 @@ const routes: Routes = [
     FormsModule,
     SlimLoadingBarModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    ReactiveFormsModule
   ],
   providers: [ AdpostingService ],
   bootstrap: [AppComponent]
