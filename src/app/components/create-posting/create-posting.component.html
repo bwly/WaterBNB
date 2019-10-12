@@ -1,3 +1,35 @@
-<p>
-  create-posting works!
-</p>
+<h2>Create a New Posting</h2>
+<div class="card">
+  <div class="card-body">
+    <form #createPostingForm="ngForm" (ngSubmit)="onSubmit(); createPostingForm.reset()">
+      <div class="form-group">
+          <label class="col-md-4" for="host_name">Host Name</label>
+          <input type="text" class="form-control" id="host_name" required [(ngModel)]="model.host_name" name="host_name"/>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4" for="unit_name">Unit Name</label>
+        <input type="text" class="form-control" id="unit_name" required [(ngModel)]="model.unit_name" name="unit_name"/>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4" for="unit_price">Unit Price</label>
+        <input type="text" class="form-control" id="unit_price" required [(ngModel)]="model.unit_price" name="unit_price"/>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4" unit="description">Description</label>
+        <input type="text" class="form-control" id="description" required [(ngModel)]="model.description" name="description"/>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4" for="location">Location</label>
+        <input type="text" class="form-control" id="location" required [(ngModel)]="model.location" name="location"/>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="!createPostingForm.form.valid">Create Unit</button>
+      </div>
+    </form>
+  </div>
+</div>

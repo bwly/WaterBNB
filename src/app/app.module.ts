@@ -8,6 +8,13 @@ import { EditPostingComponent } from './components/edit-posting/edit-posting.com
 import { RouterModule, Routes } from '@angular/router';
 import { IndexPostingComponent } from './components/index-posting/index-posting.component';
 
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import { AdpostingService } from './adposting.service';
+import { FormsModule } from '@angular/forms';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+
 const routes: Routes = [
   {
     path: 'createPosting',
@@ -32,9 +39,13 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
+    SlimLoadingBarModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [ AdpostingService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
