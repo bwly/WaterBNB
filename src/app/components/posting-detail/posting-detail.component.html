@@ -1,0 +1,26 @@
+
+<h2>Posting Details</h2>
+<div class="card" *ngFor="let posting of postings">
+  <div class="card-body" *ngIf="posting.id === id">
+      <div>
+        <h4><b>Host Name:</b> {{ posting.host_name }}</h4>
+      </div>
+
+      <div>
+        <h4><b>Unit Name:</b> {{ posting.unit_name}}</h4>
+      </div>
+
+      <div>
+        <h4><b>Unit Price:</b> {{ posting.unit_price}}</h4>
+      </div>
+
+      <div>
+        <h4><b>Description:</b> {{ posting.description}}</h4>
+      </div>
+
+      <div>
+        <h4><b>Location:</b> {{ posting.location }}</h4>
+      </div>
+  </div>
+</div>
+<button (click)="goBack()">go back</button>

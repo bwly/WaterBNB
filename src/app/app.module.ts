@@ -15,6 +15,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PostingDetailComponent } from './components/posting-detail/posting-detail.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'indexPosting',
     component: IndexPostingComponent
+  },
+  {
+    path: 'detail/:id',
+    component: PostingDetailComponent
   }
 ];
 
@@ -36,7 +41,8 @@ const routes: Routes = [
     AppComponent,
     CreatePostingComponent,
     EditPostingComponent,
-    IndexPostingComponent
+    IndexPostingComponent,
+    PostingDetailComponent
   ],
   imports: [
     BrowserModule,
