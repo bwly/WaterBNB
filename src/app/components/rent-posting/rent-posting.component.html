@@ -1,6 +1,6 @@
 <h2>Rent Posting</h2>
-<div class="card">
-  <div class="card-body">
+<div class="card" *ngFor="let posting of postings">
+  <div class="card-body" *ngIf="posting.id === id">
     <form [formGroup]="angForm" novalidate>
       * required
       <br/><br/>
@@ -15,7 +15,7 @@
       </div>
 
       <div class="form-group">
-        <label class="col-md-4">How Many Days?*</label>
+        <label class="col-md-4">How Many Days? Costs ${{ posting.unit_price }} per day*</label>
         <input type="number" class="form-control" name="days" formControlName="days" #days/>
       </div>
       <div *ngIf="angForm.controls['days'].invalid && (angForm.controls['days'].dirty || angForm.controls['days'].touched)" class="alert alert-danger">

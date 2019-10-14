@@ -3,6 +3,7 @@ import { AdpostingService } from '../../adposting.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Posting } from '../../models/posting';
 
 @Component({
   selector: 'app-rent-posting',
@@ -13,6 +14,7 @@ export class RentPostingComponent implements OnInit {
   angForm: FormGroup;
   model: Object;
   id: string;
+  postings: Posting[];
 
   constructor(
     private location: Location,
@@ -22,7 +24,7 @@ export class RentPostingComponent implements OnInit {
       this.createForm();
   }
 
-  createForm() {
+  createForm(): void  {
     this.angForm = this.fb.group({
       renter_name: [ '', Validators.required ],
       days: [ '', Validators.required ],
@@ -30,8 +32,7 @@ export class RentPostingComponent implements OnInit {
     });
   }
 
-  rentPosting(renter_name, days, guests) {
-    this.id = this.route.snapshot.paramMap.get('id');
+  rentPosting(renter_name, days, guests): void {
     this.model = {
       renter_name: renter_name,
       days: days,
@@ -46,5 +47,12 @@ export class RentPostingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.getPostings();
   }
+
+  getPostings(): void {
+    this.postingService.getPostings().subscribe(postings => this.postings = postings);
+  }
+
 }

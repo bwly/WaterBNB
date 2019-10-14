@@ -3,12 +3,14 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 import { Posting } from './models/posting';
 import { Router } from '@angular/router';
+import { Comment } from './models/comment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdpostingService {
   postings: Observable<Posting[]>;
+  comments: Observable<Comment[]>;
 
   constructor(private database: AngularFireDatabase, private router: Router) { }
 
@@ -25,5 +27,14 @@ export class AdpostingService {
   rentPosting(id: string, model: Object): void {
     this.database.list('Postings').update(id, model);
     this.router.navigate(['/detail', id]);
+  }
+
+  postComment(model: Comment): void {
+    this.database.list('Comments').push(model);
+  }
+
+  getComments(): Observable<Comment[]> {
+    this.comments = <Observable<Comment[]>>this.database.list('Comments').valueChanges();
+    return this.comments;
   }
 }

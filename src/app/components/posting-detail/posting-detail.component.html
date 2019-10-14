@@ -36,6 +36,39 @@
         <div>
           <h4><b>Number of Guests:</b> {{ posting.guests}} </h4>
         </div>
+        
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="angForm">
+              <div class="form-group">
+                <label class="col-md-4">Add a Comment!</label>
+                <textarea type="text" class="form-control" name="comment" formControlName="comment" #comment></textarea>
+              </div>
+          
+              <div class="form-group">
+                <label class="col-md-4">Name:</label>
+                <input type="text" class="form-control" name="name" formControlName="name" #name/>
+              </div>
+
+              <div class="form-group">
+                <button (click)="postComment(comment.value, name.value)" [disabled]="angForm.controls['comment'].pristine" class="btn btn-primary">
+                  Post Comment
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <br/>
+        <h3>Comments:</h3>
+        <div *ngFor="let comment of comments">
+          <div class="card" *ngIf="comment.id === id">
+            <div class="card-body">
+              "{{ comment.message }}"<br/>
+              <h6 align='right'>{{ comment.name }}</h6>
+            </div>
+          </div>
+        </div>
       </div>
   </div>
 </div>
