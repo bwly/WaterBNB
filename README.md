@@ -1,5 +1,7 @@
 # WaterBNB
 
+Project is currently hosted on https://waterbnb-1c429.firebaseapp.com.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.3.
 
 ## Development server
