@@ -16,24 +16,17 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PostingDetailComponent } from './components/posting-detail/posting-detail.component';
+import { AvailPostingComponent } from './components/avail-posting/avail-posting.component';
+import { RentPostingComponent } from './components/rent-posting/rent-posting.component';
 
 const routes: Routes = [
-  {
-    path: 'createPosting',
-    component: CreatePostingComponent
-  },
-  {
-    path: 'editPosting/:id',
-    component: EditPostingComponent
-  },
-  {
-    path: 'indexPosting',
-    component: IndexPostingComponent
-  },
-  {
-    path: 'detail/:id',
-    component: PostingDetailComponent
-  }
+  { path: 'createPosting', component: CreatePostingComponent },
+  { path: 'editPosting/:id', component: EditPostingComponent },
+  { path: 'indexPosting', component: IndexPostingComponent },
+  { path: 'detail/:id', component: PostingDetailComponent },
+  { path: 'availPosting', component: AvailPostingComponent},
+  { path: 'rentPosting/:id', component: RentPostingComponent},
+  { path: '', redirectTo: '/availPosting', pathMatch: 'full'}
 ];
 
 @NgModule({
@@ -42,7 +35,9 @@ const routes: Routes = [
     CreatePostingComponent,
     EditPostingComponent,
     IndexPostingComponent,
-    PostingDetailComponent
+    PostingDetailComponent,
+    AvailPostingComponent,
+    RentPostingComponent
   ],
   imports: [
     BrowserModule,

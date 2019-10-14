@@ -1,0 +1,45 @@
+<h2>Rent Posting</h2>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="angForm" novalidate>
+      * required
+      <br/><br/>
+      <div class="form-group">
+        <label class="col-md-4">Renter Name*</label>
+        <input type="text" class="form-control" name="renter_name" formControlName="renter_name" #renter_name/>
+      </div>
+      <div *ngIf="angForm.controls['renter_name'].invalid && (angForm.controls['renter_name'].dirty || angForm.controls['renter_name'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['renter_name'].errors.required">
+          Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4">How Many Days?*</label>
+        <input type="number" class="form-control" name="days" formControlName="days" #days/>
+      </div>
+      <div *ngIf="angForm.controls['days'].invalid && (angForm.controls['days'].dirty || angForm.controls['days'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['days'].errors.required">
+          Number of days is required and must be a number
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4">Number of Guests*</label>
+        <input type="number" class="form-control" name="guests" formControlName="guests" #guests/>
+      </div>
+      <div *ngIf="angForm.controls['guests'].invalid && (angForm.controls['guests'].dirty || angForm.controls['guests'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['guests'].errors.required">
+          Number of guests is required and must be a number
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button (click)="rentPosting(renter_name.value, days.value, guests.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">
+          Rent Posting
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<button (click)="goBack()">Go Back</button>

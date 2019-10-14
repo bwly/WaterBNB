@@ -13,8 +13,11 @@ export class CreatePostingComponent implements OnInit {
   angForm: FormGroup;
 
   model: Posting;
-  constructor(private postingService: AdpostingService, private fb: FormBuilder) {
-    this.createForm();
+  constructor(
+    private postingService: AdpostingService,
+    private fb: FormBuilder
+  ) {
+      this.createForm();
   }
 
   createForm() {

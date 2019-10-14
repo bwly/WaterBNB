@@ -11,7 +11,7 @@
       </div>
 
       <div>
-        <h4><b>Unit Price:</b> {{ posting.unit_price}}</h4>
+        <h4><b>Unit Price:</b> {{ posting.unit_price}} per day</h4>
       </div>
 
       <div>
@@ -21,6 +21,22 @@
       <div>
         <h4><b>Location:</b> {{ posting.location }}</h4>
       </div>
+      <div *ngIf="posting.available === true">
+        <a [routerLink]="['/rentPosting', id]" class="btn btn-primary">Rent</a>
+      </div>
+      <div *ngIf="posting.available === false">
+        <div>
+          <h4><b>Renter:</b> {{ posting.renter_name }}</h4>
+        </div>
+
+        <div>
+          <h4><b>Number of Days:</b> {{ posting.days }}</h4>
+        </div>
+
+        <div>
+          <h4><b>Number of Guests:</b> {{ posting.guests}} </h4>
+        </div>
+      </div>
   </div>
 </div>
-<button (click)="goBack()">go back</button>
+<button (click)="goBack()">Go Back</button>
