@@ -7,7 +7,6 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CreatePostingComponent } from './components/create-posting/create-posting.component';
-import { EditPostingComponent } from './components/edit-posting/edit-posting.component';
 import { IndexPostingComponent } from './components/index-posting/index-posting.component';
 import { PostingDetailComponent } from './components/posting-detail/posting-detail.component';
 import { AvailPostingComponent } from './components/avail-posting/avail-posting.component';
@@ -29,7 +28,6 @@ import { MyRentHistoryComponent } from './components/my-rent-history/my-rent-his
 
 const routes: Routes = [
   { path: 'createPosting', component: CreatePostingComponent, canActivate: [AuthGuard] },
-  { path: 'editPosting/:id', component: EditPostingComponent, canActivate: [AuthGuard] },
   { path: 'indexPosting', component: IndexPostingComponent, canActivate: [AuthGuard] },
   { path: 'detail/:id', component: PostingDetailComponent, canActivate: [AuthGuard] },
   { path: 'availPosting', component: AvailPostingComponent, canActivate: [AuthGuard]},
@@ -45,7 +43,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     CreatePostingComponent,
-    EditPostingComponent,
     IndexPostingComponent,
     PostingDetailComponent,
     AvailPostingComponent,

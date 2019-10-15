@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './auth.service';
 
 @Injectable({

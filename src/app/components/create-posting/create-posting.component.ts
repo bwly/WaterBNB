@@ -10,7 +10,6 @@ import { AuthService } from '../../auth.service';
   styleUrls: ['./create-posting.component.css']
 })
 export class CreatePostingComponent implements OnInit {
-
   angForm: FormGroup;
   model: Posting;
   name: string;
@@ -22,28 +21,28 @@ export class CreatePostingComponent implements OnInit {
     private authService: AuthService
   ) {
       this.createForm();
+    }
+
+    createForm() {
+      this.angForm = this.fb.group({
+        unit_name: [ '', Validators.required ],
+        unit_price: [ '', Validators.required ],
+        description: [ '' ],
+        location: [ '', Validators.required ]
+      });
+    }
+
+    getUser(): void {
+      this.name = this.authService.getUserName();
+      this.uid = this.authService.getUserUid();
+    }
+
+    addPosting(unit_name, unit_price, description, location) {
+      this.model = new Posting(this.name, unit_name, unit_price, description, location, this.uid);
+      this.postingService.addPosting(this.model);
+    }
+
+    ngOnInit() {
       this.getUser();
-  }
-
-  createForm() {
-    this.angForm = this.fb.group({
-      unit_name: [ '', Validators.required ],
-      unit_price: [ '', Validators.required ],
-      description: [ '' ],
-      location: [ '', Validators.required ]
-    });
-  }
-
-  getUser(): void {
-    this.name = this.authService.getUserName();
-    this.uid = this.authService.getUserUid();
-  }
-
-  addPosting(unit_name, unit_price, description, location) {
-    this.model = new Posting(this.name, unit_name, unit_price, description, location, this.uid);
-    this.postingService.addPosting(this.model);
-  }
-
-  ngOnInit() {
   }
 }

@@ -1,70 +1,72 @@
 <h2>Posting Details</h2>
-<div class="card" *ngFor="let posting of postings">
-  <div class="card-body" *ngIf="posting.id === id">
-      <div>
-        <h4><b>Host Name:</b> {{ posting.host_name }}</h4>
-      </div>
-
-      <div>
-        <h4><b>Unit Name:</b> {{ posting.unit_name}}</h4>
-      </div>
-
-      <div>
-        <h4><b>Unit Price:</b> {{ posting.unit_price}} per day</h4>
-      </div>
-
-      <div>
-        <h4><b>Description:</b> {{ posting.description}}</h4>
-      </div>
-
-      <div>
-        <h4><b>Location:</b> {{ posting.location }}</h4>
-      </div>
-      <div *ngIf="posting.available === true">
-        <a [routerLink]="['/rentPosting', id]" class="btn btn-primary" *ngIf="posting.uid !== this.uid">Rent</a>
-        <button (click)="deletePosting(id)" class="btn btn-danger" *ngIf="posting.uid === this.uid">Delete</button>
-      </div>
-      <div *ngIf="posting.available === false">
+<ng-container *ngFor="let posting of postings">
+  <div class="card" *ngIf="posting.id === id">
+    <div class="card-body">
         <div>
-          <h4><b>Renter:</b> {{ posting.renter_name }}</h4>
+          <h4><b>Host Name:</b> {{ posting.host_name }}</h4>
         </div>
 
         <div>
-          <h4><b>Number of Days:</b> {{ posting.days }}</h4>
+          <h4><b>Unit Name:</b> {{ posting.unit_name}}</h4>
         </div>
 
         <div>
-          <h4><b>Number of Guests:</b> {{ posting.guests}} </h4>
+          <h4><b>Unit Price:</b> {{ posting.unit_price}} per day</h4>
         </div>
-        
-        <div class="card">
-          <div class="card-body">
-            <form [formGroup]="angForm">
-              <div class="form-group">
-                <label class="col-md-4">Add a Comment!</label>
-                <textarea type="text" class="form-control" name="comment" formControlName="comment" #comment></textarea>
-              </div>
 
-              <div class="form-group">
-                <button (click)="postComment(comment.value)" [disabled]="angForm.controls['comment'].pristine" class="btn btn-primary">
-                  Post Comment
-                </button>
-              </div>
-            </form>
+        <div>
+          <h4><b>Description:</b> {{ posting.description}}</h4>
+        </div>
+
+        <div>
+          <h4><b>Location:</b> {{ posting.location }}</h4>
+        </div>
+        <div *ngIf="posting.available === true">
+          <a [routerLink]="['/rentPosting', id]" class="btn btn-primary" *ngIf="posting.host_uid !== this.uid">Rent</a>
+          <button (click)="deletePosting(id)" class="btn btn-danger" *ngIf="posting.host_uid === this.uid">Delete</button>
+        </div>
+        <div *ngIf="posting.available === false">
+          <div>
+            <h4><b>Renter:</b> {{ posting.renter_name }}</h4>
           </div>
-        </div>
 
-        <br/>
-        <h3>Comments:</h3>
-        <div *ngFor="let comment of comments">
-          <div class="card" *ngIf="comment.id === id">
+          <div>
+            <h4><b>Number of Days:</b> {{ posting.days }}</h4>
+          </div>
+
+          <div>
+            <h4><b>Number of Guests:</b> {{ posting.guests}} </h4>
+          </div>
+          
+          <div class="card">
             <div class="card-body">
-              "{{ comment.message }}"<br/>
-              <h6 align='right'>{{ comment.name }}</h6>
+              <form [formGroup]="angForm">
+                <div class="form-group">
+                  <label class="col-md-4">Add a Comment!</label>
+                  <textarea type="text" class="form-control" name="comment" formControlName="comment" #comment></textarea>
+                </div>
+
+                <div class="form-group">
+                  <button (click)="postComment(comment.value)" [disabled]="angForm.controls['comment'].pristine" class="btn btn-primary">
+                    Post Comment
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <br/>
+          <h3>Comments:</h3>
+          <div *ngFor="let comment of comments">
+            <div class="card" *ngIf="comment.id === id">
+              <div class="card-body">
+                "{{ comment.message }}"<br/>
+                <h6 align='right'>{{ comment.name }}</h6>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+    </div>
   </div>
-</div>
+</ng-container>
 <button (click)="goBack()">Go Back</button>
