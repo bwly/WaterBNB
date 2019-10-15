@@ -6,6 +6,7 @@ import { NavigationCancel,
   NavigationError,
   NavigationStart,
   Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,14 @@ import { NavigationCancel,
 })
 export class AppComponent {
   title = 'WaterBNB';
+  loggedIn = this.authService.checkUser();
 
-  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router) {
-    this._router.events.subscribe((event: Event) => {
+  constructor(
+    private _loadingBar: SlimLoadingBarService,
+    private _router: Router,
+    public authService: AuthService
+    ) {
+      this._router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
     });
   }
@@ -33,5 +39,15 @@ export class AppComponent {
     if (event instanceof NavigationError) {
       this._loadingBar.stop();
     }
+    this.loggedIn = this.authService.checkUser();
+  }
+
+
+  logOut() {
+    this.authService.doLogout()
+    .then((res) => {
+      this._router.navigate(['']);
+    }, (error) => {
+    });
   }
 }

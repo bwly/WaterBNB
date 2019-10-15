@@ -5,16 +5,6 @@
       * required
       <br/><br/>
       <div class="form-group">
-        <label class="col-md-4">Host Name*</label>
-        <input type="text" class="form-control" name="host_name" formControlName="host_name" #host_name/>
-      </div>
-      <div *ngIf="angForm.controls['host_name'].invalid && (angForm.controls['host_name'].dirty || angForm.controls['host_name'].touched)" class="alert alert-danger">
-        <div *ngIf="angForm.controls['host_name'].errors.required">
-          Host Name is required
-        </div>
-      </div>
-
-      <div class="form-group">
         <label class="col-md-4">Unit Name*</label>
         <input type="text" class="form-control" name="unit_name" formControlName="unit_name" #unit_name/>
       </div>
@@ -50,7 +40,7 @@
       </div>
 
       <div class="form-group">
-        <button (click)="addPosting(host_name.value, unit_name.value, unit_price.value, description.value, location.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">
+        <button (click)="addPosting(unit_name.value, unit_price.value, description.value, location.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">
           Create Posting
         </button>
       </div>

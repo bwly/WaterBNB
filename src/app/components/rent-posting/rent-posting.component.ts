@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Posting } from '../../models/posting';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-rent-posting',
@@ -15,26 +16,28 @@ export class RentPostingComponent implements OnInit {
   model: Object;
   id: string;
   postings: Posting[];
+  name: string;
+  uid: string;
 
   constructor(
     private location: Location,
     private postingService: AdpostingService,
     private route: ActivatedRoute,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private authService: AuthService) {
       this.createForm();
   }
 
   createForm(): void  {
     this.angForm = this.fb.group({
-      renter_name: [ '', Validators.required ],
       days: [ '', Validators.required ],
       guests: [ '', Validators.required ]
     });
   }
 
-  rentPosting(renter_name, days, guests): void {
+  rentPosting(days, guests): void {
     this.model = {
-      renter_name: renter_name,
+      renter_name: this.name,
       days: days,
       guests: guests,
       available: false
@@ -49,6 +52,12 @@ export class RentPostingComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getPostings();
+    this.getUser();
+  }
+
+  getUser(): void {
+    this.name = this.authService.getUserName();
+    this.uid = this.authService.getUserUid();
   }
 
   getPostings(): void {

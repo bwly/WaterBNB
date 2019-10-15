@@ -5,16 +5,6 @@
       * required
       <br/><br/>
       <div class="form-group">
-        <label class="col-md-4">Renter Name*</label>
-        <input type="text" class="form-control" name="renter_name" formControlName="renter_name" #renter_name/>
-      </div>
-      <div *ngIf="angForm.controls['renter_name'].invalid && (angForm.controls['renter_name'].dirty || angForm.controls['renter_name'].touched)" class="alert alert-danger">
-        <div *ngIf="angForm.controls['renter_name'].errors.required">
-          Name is required
-        </div>
-      </div>
-
-      <div class="form-group">
         <label class="col-md-4">How Many Days? Costs ${{ posting.unit_price }} per day*</label>
         <input type="number" class="form-control" name="days" formControlName="days" #days/>
       </div>
@@ -35,7 +25,7 @@
       </div>
 
       <div class="form-group">
-        <button (click)="rentPosting(renter_name.value, days.value, guests.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">
+        <button (click)="rentPosting(days.value, guests.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">
           Rent Posting
         </button>
       </div>

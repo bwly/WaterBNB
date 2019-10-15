@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Posting } from '../../models/posting';
 import { AdpostingService } from '../../adposting.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-create-posting',
@@ -11,18 +12,21 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class CreatePostingComponent implements OnInit {
 
   angForm: FormGroup;
-
   model: Posting;
+  name: string;
+  uid: string;
+
   constructor(
     private postingService: AdpostingService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService
   ) {
       this.createForm();
+      this.getUser();
   }
 
   createForm() {
     this.angForm = this.fb.group({
-      host_name: [ '', Validators.required ],
       unit_name: [ '', Validators.required ],
       unit_price: [ '', Validators.required ],
       description: [ '' ],
@@ -30,8 +34,13 @@ export class CreatePostingComponent implements OnInit {
     });
   }
 
-  addPosting(host_name, unit_name, unit_price, description, location) {
-    this.model = new Posting(host_name, unit_name, unit_price, description, location);
+  getUser(): void {
+    this.name = this.authService.getUserName();
+    this.uid = this.authService.getUserUid();
+  }
+
+  addPosting(unit_name, unit_price, description, location) {
+    this.model = new Posting(this.name, unit_name, unit_price, description, location, this.uid);
     this.postingService.addPosting(this.model);
   }
 

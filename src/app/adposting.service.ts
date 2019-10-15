@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Posting } from './models/posting';
 import { Router } from '@angular/router';
 import { Comment } from './models/comment';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AdpostingService {
   postings: Observable<Posting[]>;
   comments: Observable<Comment[]>;
 
-  constructor(private database: AngularFireDatabase, private router: Router) { }
+  constructor(private database: AngularFireDatabase, private router: Router, private location: Location) { }
 
   getPostings(): Observable<Posting[]> {
     this.postings = <Observable<Posting[]>>this.database.list('Postings').valueChanges();
@@ -27,6 +28,10 @@ export class AdpostingService {
   rentPosting(id: string, model: Object): void {
     this.database.list('Postings').update(id, model);
     this.router.navigate(['/detail', id]);
+  }
+
+  deletePosting(id: string): void {
+    this.database.list('Postings').remove(id).then(res => this.location.back());
   }
 
   postComment(model: Comment): void {

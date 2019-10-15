@@ -19,15 +19,22 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
-  { path: 'createPosting', component: CreatePostingComponent },
-  { path: 'editPosting/:id', component: EditPostingComponent },
-  { path: 'indexPosting', component: IndexPostingComponent },
-  { path: 'detail/:id', component: PostingDetailComponent },
-  { path: 'availPosting', component: AvailPostingComponent},
-  { path: 'rentPosting/:id', component: RentPostingComponent},
-  { path: '', redirectTo: '/availPosting', pathMatch: 'full'},
+  { path: 'createPosting', component: CreatePostingComponent, canActivate: [AuthGuard] },
+  { path: 'editPosting/:id', component: EditPostingComponent, canActivate: [AuthGuard] },
+  { path: 'indexPosting', component: IndexPostingComponent, canActivate: [AuthGuard] },
+  { path: 'detail/:id', component: PostingDetailComponent, canActivate: [AuthGuard] },
+  { path: 'availPosting', component: AvailPostingComponent, canActivate: [AuthGuard]},
+  { path: 'rentPosting/:id', component: RentPostingComponent, canActivate: [AuthGuard] },
+  { path: '', component: WelcomeComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({
@@ -38,7 +45,10 @@ const routes: Routes = [
     IndexPostingComponent,
     PostingDetailComponent,
     AvailPostingComponent,
-    RentPostingComponent
+    RentPostingComponent,
+    LoginComponent,
+    RegisterComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +61,9 @@ const routes: Routes = [
     AngularFireAuthModule
   ],
   providers: [
-    AdpostingService
+    AdpostingService,
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
