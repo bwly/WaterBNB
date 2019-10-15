@@ -40,7 +40,8 @@ export class RentPostingComponent implements OnInit {
       renter_name: this.name,
       days: days,
       guests: guests,
-      available: false
+      available: false,
+      renter_uid: this.uid
     };
     this.postingService.rentPosting(this.id, this.model);
   }
