@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class AdpostingService {
   postings: Observable<Posting[]>;
   comments: Observable<Comment[]>;
+  posting: Observable<Posting>;
 
   constructor(private database: AngularFireDatabase, private router: Router, private location: Location) { }
 
@@ -41,5 +42,10 @@ export class AdpostingService {
   getComments(): Observable<Comment[]> {
     this.comments = <Observable<Comment[]>>this.database.list('Comments').valueChanges();
     return this.comments;
+  }
+
+  getPosting(id: string): Observable<Posting> {
+    this.posting = <Observable<Posting>>this.database.object('Postings/' + id).valueChanges();
+    return this.posting;
   }
 }

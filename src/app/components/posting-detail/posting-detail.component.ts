@@ -14,12 +14,12 @@ import { AuthService } from '../../auth.service';
 })
 export class PostingDetailComponent implements OnInit {
   angForm: FormGroup;
-  postings: Posting[];
   id: string;
   model: Comment;
   comments: Comment[];
   name: string;
   uid: string;
+  posting: Posting;
 
   constructor(
     private location: Location,
@@ -37,7 +37,7 @@ export class PostingDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPostings();
+    this.getPosting();
     this.getComments();
     this.getUser();
   }
@@ -45,11 +45,6 @@ export class PostingDetailComponent implements OnInit {
   getUser(): void {
     this.name = this.authService.getUserName();
     this.uid = this.authService.getUserUid();
-  }
-
-  getPostings(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.postingService.getPostings().subscribe(postings => this.postings = postings);
   }
 
   getComments(): void {
@@ -67,5 +62,12 @@ export class PostingDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  getPosting(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.postingService.getPosting(this.id).subscribe(posting => {
+      this.posting = posting;
+    });
   }
 }

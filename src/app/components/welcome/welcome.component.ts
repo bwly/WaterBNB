@@ -13,8 +13,8 @@ export class WelcomeComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.getUser();
     this.checkUser();
+    this.getUser();
   }
 
   checkUser(): void {
@@ -22,6 +22,8 @@ export class WelcomeComponent implements OnInit {
   }
 
   getUser(): void {
-    this.name = this.authService.getUserName();
+    if (this.loggedIn) {
+      this.name = this.authService.getUserName();
+    }
   }
 }
