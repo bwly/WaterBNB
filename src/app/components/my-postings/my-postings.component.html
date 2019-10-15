@@ -6,7 +6,7 @@
       <td>Unit Price (per day)</td>
       <td>Location</td>
       <td>Still Available</td>
-      <td colspan="1">Actions</td>
+      <td colspan="2">Actions</td>
     </tr>
   </thead>
 
@@ -19,6 +19,7 @@
         <td *ngIf="(posting.available)">Yes</td>
         <td *ngIf="(!posting.available)">No</td>
         <td><a [routerLink]="['/detail', posting.id]" class="btn btn-primary">See More</a></td>
+        <td><a [routerLink]="['/editPosting', posting.id]" class="btn btn-primary" *ngIf="(posting.available)">Edit</a></td>
     </tr>
   </tbody>
 </table>

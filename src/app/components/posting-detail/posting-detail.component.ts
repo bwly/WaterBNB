@@ -66,8 +66,6 @@ export class PostingDetailComponent implements OnInit {
 
   getPosting(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.postingService.getPosting(this.id).subscribe(posting => {
-      this.posting = posting;
-    });
+    this.postingService.getPosting(this.id).subscribe(posting => this.posting = posting);
   }
 }

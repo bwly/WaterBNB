@@ -48,4 +48,9 @@ export class AdpostingService {
     this.posting = <Observable<Posting>>this.database.object('Postings/' + id).valueChanges();
     return this.posting;
   }
+
+  updatePosting(posting: Posting, id: string): void {
+    this.database.list('Postings').update(id, posting);
+    this.router.navigate(['/detail', id]);
+  }
 }

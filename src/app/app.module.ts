@@ -25,6 +25,7 @@ import { AuthService } from './auth.service';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MyPostingsComponent } from './components/my-postings/my-postings.component';
 import { MyRentHistoryComponent } from './components/my-rent-history/my-rent-history.component';
+import { EditPostingComponent } from './components/edit-posting/edit-posting.component';
 
 const routes: Routes = [
   { path: 'createPosting', component: CreatePostingComponent, canActivate: [AuthGuard] },
@@ -36,7 +37,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'myPostings', component: MyPostingsComponent, canActivate: [AuthGuard]},
-  { path: 'history', component: MyRentHistoryComponent, canActivate: [AuthGuard]}
+  { path: 'history', component: MyRentHistoryComponent, canActivate: [AuthGuard]},
+  { path: 'editPosting/:id', component: EditPostingComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -51,7 +53,8 @@ const routes: Routes = [
     RegisterComponent,
     WelcomeComponent,
     MyPostingsComponent,
-    MyRentHistoryComponent
+    MyRentHistoryComponent,
+    EditPostingComponent
   ],
   imports: [
     BrowserModule,
