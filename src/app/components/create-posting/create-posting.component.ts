@@ -3,6 +3,8 @@ import { Posting } from '../../models/posting';
 import { AdpostingService } from '../../adposting.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../auth.service';
+import { UploadFileService } from '../../upload-file.service';
+import { FileUpload } from '../../models/fileUpload';
 
 @Component({
   selector: 'app-create-posting',
@@ -14,11 +16,14 @@ export class CreatePostingComponent implements OnInit {
   model: Posting;
   name: string;
   uid: string;
+  selectedFiles: FileList = null;
+  currentFileUpload: FileUpload;
 
   constructor(
     private postingService: AdpostingService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private uploadService: UploadFileService
   ) {
       this.createForm();
     }
@@ -39,10 +44,29 @@ export class CreatePostingComponent implements OnInit {
 
     addPosting(unit_name, unit_price, description, location) {
       this.model = new Posting(this.name, unit_name, unit_price, description, location, this.uid);
-      this.postingService.addPosting(this.model);
+
+      if (this.selectedFiles) {
+        const file = this.selectedFiles.item(0);
+        this.selectFile = undefined;
+
+        this.currentFileUpload = new FileUpload(file);
+        this.uploadService.pushFileToStorage(this.currentFileUpload, this.model);
+      } else {
+        this.postingService.addPosting(this.model);
+      }
+    }
+
+    selectFile(event) {
+      const file = event.target.files.item(0);
+
+      if (file.type.match('image.*')) {
+        this.selectedFiles = event.target.files;
+      } else {
+        alert('invalid format!');
+      }
     }
 
     ngOnInit() {
       this.getUser();
-  }
+    }
 }

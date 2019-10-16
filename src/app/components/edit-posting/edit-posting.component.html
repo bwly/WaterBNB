@@ -40,8 +40,12 @@
         </div>
       </div>
 
+      <label class="btn btn-default"> <input type="file"
+        (change)="selectFile($event)">
+      </label>
+
       <div class="form-group">
-        <button (click)="updatePosting(unit_name.value, unit_price.value, description.value, location.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">
+        <button (click)="updatePosting(unit_name.value, unit_price.value, description.value, location.value)" [disabled]="angForm.invalid" class="btn btn-primary">
           Update Posting
         </button>
       </div>

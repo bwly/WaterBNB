@@ -1,3 +1,5 @@
+import { FileUpload } from './fileUpload';
+
 export class Posting {
     id: string;
     host_name: string;
@@ -11,6 +13,7 @@ export class Posting {
     guests: number;
     host_uid: string;
     renter_uid: string;
+    image: FileUpload;
 
     constructor (host_name: string, unit_name: string, unit_price: number, description: string, location: string, uid: string) {
         this.host_name = host_name;

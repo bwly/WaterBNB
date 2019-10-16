@@ -13,6 +13,7 @@ export class AdpostingService {
   postings: Observable<Posting[]>;
   comments: Observable<Comment[]>;
   posting: Observable<Posting>;
+  id: string;
 
   constructor(private database: AngularFireDatabase, private router: Router, private location: Location) { }
 

@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { FileUpload } from '../../models/fileUpload';
+import { UploadFileService } from '../../upload-file.service';
 
 @Component({
   selector: 'app-edit-posting',
@@ -17,13 +19,16 @@ export class EditPostingComponent implements OnInit {
   name: string;
   uid: string;
   id: string;
+  selectedFiles: FileList = null;
+  currentFileUpload: FileUpload;
 
   constructor(
     private postingService: AdpostingService,
     private fb: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private uploadService: UploadFileService
   ) { }
 
     createForm() {
@@ -45,7 +50,16 @@ export class EditPostingComponent implements OnInit {
       this.posting.unit_price = unit_price;
       this.posting.description = description;
       this.posting.location = location;
-      this.postingService.updatePosting(this.posting, this.id);
+
+      if (this.selectedFiles) {
+        const file = this.selectedFiles.item(0);
+        this.selectFile = undefined;
+
+        this.currentFileUpload = new FileUpload(file);
+        this.uploadService.updateFileUpload(this.currentFileUpload, this.posting, this.id);
+      } else {
+        this.postingService.updatePosting(this.posting, this.id);
+      }
     }
 
     getPosting(): void {
@@ -54,6 +68,16 @@ export class EditPostingComponent implements OnInit {
         this.posting = posting;
         this.createForm();
       });
+    }
+
+    selectFile(event) {
+      const file = event.target.files.item(0);
+
+      if (file.type.match('image.*')) {
+        this.selectedFiles = event.target.files;
+      } else {
+        alert('invalid format!');
+      }
     }
 
     goBack(): void {

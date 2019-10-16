@@ -2,6 +2,9 @@
 <button (click)="goBack()" class="btn btn-primary">Go Back</button>
 <div class="card" *ngIf="(posting)">
   <div class="card-body">
+    <div *ngIf="(posting.image)">
+      <img id="image" src="{{posting.image.url}}" alt="{{posting.image.name}}" style="max-width:500px"/>
+    </div>
     <div>
       <h4><b>Host Name:</b> {{ posting.host_name }}</h4>
     </div>

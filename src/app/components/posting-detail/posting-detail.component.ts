@@ -6,6 +6,7 @@ import { AdpostingService } from '../../adposting.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Comment } from '../../models/comment';
 import { AuthService } from '../../auth.service';
+import { UploadFileService } from 'src/app/upload-file.service';
 
 @Component({
   selector: 'app-posting-detail',
@@ -26,7 +27,8 @@ export class PostingDetailComponent implements OnInit {
     private postingService: AdpostingService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private uploadService: UploadFileService) {
     this.createForm();
   }
 
@@ -57,6 +59,7 @@ export class PostingDetailComponent implements OnInit {
   }
 
   deletePosting(id: string): void {
+    this.uploadService.deleteFileUpload(this.posting.image);
     this.postingService.deletePosting(id);
   }
 
