@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { UploadFileService } from '../../upload-file.service';
 import { FileUpload } from '../../models/fileUpload';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-posting',
@@ -23,7 +24,8 @@ export class CreatePostingComponent implements OnInit {
     private postingService: AdpostingService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private uploadService: UploadFileService
+    private uploadService: UploadFileService,
+    private location: Location
   ) {
       this.createForm();
     }
@@ -64,6 +66,10 @@ export class CreatePostingComponent implements OnInit {
       } else {
         alert('invalid format!');
       }
+    }
+
+    goBack(): void {
+      this.location.back();
     }
 
     ngOnInit() {

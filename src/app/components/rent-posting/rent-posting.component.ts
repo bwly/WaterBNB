@@ -15,9 +15,10 @@ export class RentPostingComponent implements OnInit {
   angForm: FormGroup;
   model: Object;
   id: string;
-  postings: Posting[];
   name: string;
   uid: string;
+  total = 0;
+  posting: Posting;
 
   constructor(
     private location: Location,
@@ -46,13 +47,21 @@ export class RentPostingComponent implements OnInit {
     this.postingService.rentPosting(this.id, this.model);
   }
 
+  calculate(days: number) {
+    this.total = this.posting.unit_price * days;
+  }
+
+  getPosting(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.postingService.getPosting(this.id).subscribe(posting => this.posting = posting);
+  }
+
   goBack(): void {
     this.location.back();
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.getPostings();
+    this.getPosting();
     this.getUser();
   }
 
@@ -60,9 +69,4 @@ export class RentPostingComponent implements OnInit {
     this.name = this.authService.getUserName();
     this.uid = this.authService.getUserUid();
   }
-
-  getPostings(): void {
-    this.postingService.getPostings().subscribe(postings => this.postings = postings);
-  }
-
 }

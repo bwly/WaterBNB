@@ -1,19 +1,11 @@
 <h2>Rent Posting</h2>
-<div class="card" *ngFor="let posting of postings">
-  <div class="card-body" *ngIf="posting.id === id">
+<button (click)="goBack()" class="btn btn-primary">Go Back</button>
+<div class="card" *ngIf="(posting)">
+  <div class="card-body">
     <form [formGroup]="angForm" novalidate>
       * required
       <br/><br/>
-      <div class="form-group">
-        <label class="col-md-4">How Many Days? Costs ${{ posting.unit_price }} per day*</label>
-        <input type="number" class="form-control" name="days" formControlName="days" #days/>
-      </div>
-      <div *ngIf="angForm.controls['days'].invalid && (angForm.controls['days'].dirty || angForm.controls['days'].touched)" class="alert alert-danger">
-        <div *ngIf="angForm.controls['days'].errors.required">
-          Number of days is required and must be a number
-        </div>
-      </div>
-
+      
       <div class="form-group">
         <label class="col-md-4">Number of Guests*</label>
         <input type="number" class="form-control" name="guests" formControlName="guests" #guests/>
@@ -22,6 +14,20 @@
         <div *ngIf="angForm.controls['guests'].errors.required">
           Number of guests is required and must be a number
         </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-md-4">How Many Days? Costs ${{ posting.unit_price }} per day*</label>
+        <input type="number" class="form-control" name="days" formControlName="days" #days (input)="calculate(days.value)"/>
+      </div>
+      <div *ngIf="angForm.controls['days'].invalid && (angForm.controls['days'].dirty || angForm.controls['days'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['days'].errors.required">
+          Number of days is required and must be a number
+        </div>
+      </div>
+
+      <div>
+        <h4>Total Cost: ${{total}}</h4>
       </div>
 
       <div class="form-group">
@@ -32,4 +38,3 @@
     </form>
   </div>
 </div>
-<button (click)="goBack()">Go Back</button>
